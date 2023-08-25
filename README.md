@@ -1,5 +1,5 @@
-# Engeto_Academy-SQL_Project
-I will track here the SQL project activity within Engeto Data Academy
+# SQL_Project
+Description of the solution:
 
 1. 01_SQL_Project_Script_Weekend_Season_V01
 ----------------------------------------
