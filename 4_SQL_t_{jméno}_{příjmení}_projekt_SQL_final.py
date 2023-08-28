@@ -44,21 +44,6 @@ S pozdravem, Student (a.k.a. William Gosset)
 -- HDP na obyvatele - celkové HDP / počet obyvatel státu
 
 
--- gigi koeficient - majetková nerovnost
-
-
--- dětská úmrtnost
-
-
--- medián věku
-
-
--- procentualni podíl nabozenstvi na celkovém obyvatelstvu pro jednotlive zeme v roce 2020
-
-
--- očekávaná doba dožití (rozdíl 1965 a 2015)
-
-
 -- FINAL TABLE
 CREATE OR REPLACE TABLE t_Olly_projekt_SQL_final AS
 SELECT ctr.*, cov.date, cov.confirmed, cov.tests_performed, 
@@ -143,28 +128,23 @@ SELECT w1.city, w1.date, w2.binary_day, w2.season_code, w2.daily_avg_temp, w3.co
 LEFT JOIN
 (SELECT city, date,
 
-
 -- binární proměnná pro víkend = 1, pracovní den = 0
 CASE WHEN dayname(date) IN ('Sunday', 'Saturday') THEN 1 ELSE 0 AND AS binary_day,
-
 
 -- roční období daného dne jaro = 0, léto = 1, podzim = 2, zima = 3
 CASE WHEN MONTH (date) IN (12, 1, 2) THEN 3
 	WHEN MONTH (date) IN (3, 4, 5) THEN 0
 	WHEN MONTH (date) IN (6, 7, 8) THEN 1 ELSE 2 END AS season_code,
 
-
 -- průměrná denní teplota - průměr teplot v rozmezí 6 - 18 hodinou
 AVG (temp) AS daily_avg_temp FROM weather WHERE HOUR IS BETWEEN (6, 9, 12, 15, 18) GROUP BY date, city) w2
 ON w1.date = w2.date AND w1.city = w2.city
 LEFT JOIN
 
-
 -- počet hodin v daném dni, kdy byly srážky nenulové
 SELECT city, date, COUNT (rain) AS count_rain_hours FROM weather WHERE rain != 0 GROUP BY city, date) w3
 ON w1.date = w3.date AND w1.city = w3.city
 LEFT JOIN
-
 
 -- maximální síla větru v nárazech během dne, pro daný den a město
 (SELECT city, date, MAX (wind) AS max_day_wind FROM weather GROUP BY city, date) w4 
