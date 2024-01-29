@@ -51,7 +51,7 @@ rel.Christianity, rel.Islam, rel.Unaffiliated_religions, rel.Hinduism, rel.Buddh
 rel.Other_religions, rel.Judaism, wet.city, wet.binary_day, wet.season_code, wet.daily_avg_temp,
 wet.count_rain_hours, wet.max_day_wind
 FROM
-SELECT * FROM t_michal_lehuta_SQLprojekt_Countries) ctr
+SELECT * FROM t_Olly_SQLprojekt_Countries) ctr
 LEFT JOIN
 SELECT * FROM t_Olly_SQLprojekt_Religions) rel
 ON ctr.country = rel.country
